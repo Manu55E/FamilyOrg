@@ -591,7 +591,12 @@
         async function callGeminiAPI(prompt) { 
             const apiKey = "";
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
-            const payload = { contents: [{ parts: [{ text: prompt }] }] };
+            const payload = { 
+                contents: [{ 
+                    role: "user", 
+                    parts: [{ text: prompt }] 
+                }] 
+            };
             try {
                 const response = await fetch(apiUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
                 if (!response.ok) { console.error("API Error:", await response.text()); return null; }
